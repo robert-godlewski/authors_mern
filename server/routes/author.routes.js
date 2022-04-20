@@ -5,7 +5,7 @@ module.exports = (app) => {
     // Export all of the routes from the controller functions
     app.post('/api/author', AuthorController.createAuthor);
     app.get('/api/author', AuthorController.getAllAuthors);
-    //app.get('/api/products/:id', ProductController.findOneProduct);
-    //app.put('/api/products/:id', ProductController.updateProduct);
+    app.get('/api/author/:id', AuthorController.getOneAuthor);
+    app.put('/api/author/:id', AuthorController.updateAuthor);
     //app.delete('/api/products/:id', ProductController.deleteProduct);
 };

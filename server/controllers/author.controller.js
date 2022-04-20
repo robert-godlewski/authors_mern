@@ -32,9 +32,34 @@ module.exports = {
         });
     },
 
-    getOneAuthor: (req, res) => {},
+    getOneAuthor: (req, res) => {
+        Author.find({_id: req.params.id})
+        .then((oneAuthor) => {
+            console.log("One Author:");
+            console.log(oneAuthor);
+            res.json(oneAuthor);
+        })
+        .catch((err) => {
+            console.log(`getOneAuthor failed: ${err}`);
+            res.json({
+                message: "Something went wrong while retrieving an author.",
+                error: err
+            });
+        });
+    },
 
-    updateAuthor: (req, res) => {},
+    updateAuthor: (req, res) => {
+        Author.findOneAndUpdate({_id: req.params.id}, req.body, {new:true})
+        .then((updateAuthorInfo) => {
+            console.log("Updating Author:");
+            console.log(updateAuthorInfo);
+            res.json(updateAuthorInfo);
+        })
+        .catch((err) => {
+            console.log(`updateAuthor failed: ${err}`);
+            res.status(400).json(err);
+        });
+    },
 
     deleteAuthor: (req, res) => {}
 };
