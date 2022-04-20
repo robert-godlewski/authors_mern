@@ -2,19 +2,38 @@
 import './App.css';
 
 // js libraries
-import React from 'react';
+import React, {useState} from 'react';
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 
+// components
+import DisplayAll from './components/DisplayAll';
+import CreateAuthor from './components/CreateAuthor';
+
 function App() {
+  const [authorList, setAuthorList] = useState([]);
+
   return (
-    <BrowserRouter>
-      <div className="App">
-        {/*<Routes>
-          <Route path="/" />
-        </Routes>*/}
-        <p>Hello</p>
-      </div>
-    </BrowserRouter>
+    <div className="App">
+      <h1>Favorite Authors</h1>
+      <BrowserRouter>
+        <Routes>
+          <Route 
+            path="/" 
+            element={<DisplayAll 
+              authorList={authorList} 
+              setAuthorList={setAuthorList} 
+            />}
+          />
+          <Route 
+            path="/author/new" 
+            element={<CreateAuthor 
+              authorList={authorList} 
+              setAuthorList={setAuthorList} 
+            />}
+          />
+        </Routes>
+      </BrowserRouter>
+    </div>
   );
 }
 
