@@ -1,11 +1,12 @@
 // Libraries
 import React, {useEffect} from 'react';
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import axios from 'axios';
 
 
 const DisplayAll = (props) => {
     const {authorList, setAuthorList} = props;
+    const navigate = useNavigate();
 
     useEffect(() => {
         axios.get("http://localhost:8000/api/author")
@@ -33,7 +34,9 @@ const DisplayAll = (props) => {
                             <tr key={author._id}>
                                 <td>{author.name}</td>
                                 <td>
-                                    <button>Edit</button>
+                                    <button onClick={() => navigate(`/author/edit/${author._id}`)}>
+                                        Edit
+                                    </button>
                                     <button>Delete</button>
                                 </td>
                             </tr>

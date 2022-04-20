@@ -8,6 +8,7 @@ import {BrowserRouter, Routes, Route} from 'react-router-dom';
 // components
 import DisplayAll from './components/DisplayAll';
 import CreateAuthor from './components/CreateAuthor';
+import UpdateAuthor from './components/UpdateAuthor';
 
 function App() {
   const [authorList, setAuthorList] = useState([]);
@@ -27,6 +28,13 @@ function App() {
           <Route 
             path="/author/new" 
             element={<CreateAuthor 
+              authorList={authorList} 
+              setAuthorList={setAuthorList} 
+            />}
+          />
+          <Route 
+            path="/author/edit/:id"
+            element={<UpdateAuthor 
               authorList={authorList} 
               setAuthorList={setAuthorList} 
             />}
