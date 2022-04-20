@@ -8,6 +8,17 @@ const DisplayAll = (props) => {
     const {authorList, setAuthorList} = props;
     const navigate = useNavigate();
 
+    const deleteAuthor = (authorId) => {
+        axios.delete(`http://localhost:8000/api/author/${authorId}`)
+        .then((res) => {
+            console.log(res);
+            console.log(res.data);
+            const filteredList = authorList.filter((author, index) => author._id !== authorId);
+            setAuthorList(filteredList);
+        })
+        .catch((err) => console.log(err));
+    };
+
     useEffect(() => {
         axios.get("http://localhost:8000/api/author")
         .then((res) => {
@@ -37,7 +48,9 @@ const DisplayAll = (props) => {
                                     <button onClick={() => navigate(`/author/edit/${author._id}`)}>
                                         Edit
                                     </button>
-                                    <button>Delete</button>
+                                    <button onClick={(e) => deleteAuthor(author._id)}>
+                                        Delete
+                                    </button>
                                 </td>
                             </tr>
                         ))
