@@ -61,5 +61,19 @@ module.exports = {
         });
     },
 
-    deleteAuthor: (req, res) => {}
+    deleteAuthor: (req, res) => {
+        Author.deleteOne({_id: req.params.id})
+        .then((deleteConf) => {
+            console.log("Deleting Author:");
+            console.log(deleteConf);
+            res.json(deleteConf);
+        })
+        .catch((err) => {
+            console.log(`deleteAuthor failed: ${err}`);
+            res.json({
+                message: "Something went wrong while retrieving author.",
+                error: err
+            });
+        });
+    }
 };
